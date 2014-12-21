@@ -1,0 +1,6 @@
+* Complement the search with a search for TV Shows aswell.
+* If no match and user enters own name OR user is chaning name, look up if the new name matches anything (Movie / TV Show).
+* Add "(Movie)" or "(TV Show)" at the end of the name in the dropdown (Use this info to choose what track to record, 1 big track or many small).
+* Add logic for episode naming (Multiple episodes on one disk for TV show).
+* Find out what track to use
+* 

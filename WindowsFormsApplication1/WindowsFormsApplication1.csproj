@@ -81,6 +81,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HandBrake.ApplicationServices\HandBrake.ApplicationServices.csproj">
+      <Project>{087a2ba8-bac2-4577-a46f-07ff9d420016}</Project>
+      <Name>HandBrake.ApplicationServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HandBrake.Interop\HandBrakeInterop\HandBrakeInterop.csproj">
+      <Project>{f0a61f62-2c3b-4a87-aff4-0c4256253da1}</Project>
+      <Name>HandBrakeInterop</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TMDbLib\TMDbLib.csproj">
       <Project>{C0006F17-212A-474F-983E-7DA2F91E0233}</Project>
       <Name>TMDbLib</Name>

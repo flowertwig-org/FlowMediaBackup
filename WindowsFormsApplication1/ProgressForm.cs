@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HandBrake.ApplicationServices.Model;
+using HandBrake.Interop;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
@@ -12,7 +14,7 @@ namespace WindowsFormsApplication1
 {
     public partial class ProgressForm : Form
     {
-        private static SortedList<string, ProgressForm> _drives = new SortedList<string,ProgressForm>();
+        private static SortedList<string, ProgressForm> _drives = new SortedList<string, ProgressForm>();
 
         public static SortedList<string, ProgressForm> Drives
         {
@@ -27,7 +29,7 @@ namespace WindowsFormsApplication1
         public CloseDelegate PublicClose;
 
         public ProgressForm()
-            :this(null)
+            : this(null)
         {
 
         }
@@ -133,16 +135,51 @@ namespace WindowsFormsApplication1
             }
         }
 
+        private void ScanSource(string dir, HBConfiguration config)
+        {
+
+        }
+
         void backgroundWorker2_DoWork(object sender, DoWorkEventArgs e)
         {
-            for (int progress = 0; progress < 100; progress++)
-            {
-                backgroundWorker2.ReportProgress(progress, ProcessStatus.CopyTitle);
+            //for (int progress = 0; progress < 100; progress++)
+            //{
+            backgroundWorker2.ReportProgress(0, ProcessStatus.CopyTitle);
 
-                var rand = new Random();
-                var sleepTime = rand.Next(100, 15000);
-                Thread.Sleep(sleepTime);
+            var instance = new HandBrakeInstance();
+            instance.Initialize(1);
+
+            var dir = @"C:\Copy\";
+            if (!Directory.Exists(Path.GetDirectoryName(dir)))
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(dir));
             }
+
+            var config = new HBConfiguration
+            {
+                DisableQuickSyncDecoding = false,
+                EnableDxva = false,
+                IsDvdNavDisabled = true,
+                IsLoggingEnabled = false,
+                MinScanDuration = 10,
+                PreviewScanCount = 10,
+                ProcessPriority = "Below Normal",
+                SaveLogCopyDirectory = "",
+                SaveLogToCopyDirectory = false,
+                SaveLogWithVideo = false,
+                ScalingMode = VideoScaler.Lanczos,
+                Verbosity = 1
+            };
+
+            ScanSource(dir, config);
+
+
+
+
+            //    var rand = new Random();
+            //    var sleepTime = rand.Next(100, 15000);
+            //    Thread.Sleep(sleepTime);
+            //}
 
             for (int progress = 0; progress < 100; progress++)
             {
